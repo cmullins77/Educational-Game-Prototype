@@ -13,8 +13,9 @@ public class Chart : MonoBehaviour
     float verticalSpacing = 0.55f;
     float horizontalSpacing = 0.55f;
     public List<Color> startingColors;
+    public List<bool> isRandomized;
     public GameObject chipPrefab;
-    public bool startingColorsStuck;
+    public List<bool> startingColorsStuck;
     public bool randomizeStartingColors;
 
     public ChartType type;
@@ -43,23 +44,47 @@ public class Chart : MonoBehaviour
                 spots.Add(newSpot.GetComponent<Spot>());
             }
         }
+        List<Color> startCols = new List<Color>();
+        for(int i = 0; i < startingColors.Count; i++) {
+            if (!randomizeStartingColors || isRandomized[i]) {
+                startCols.Add(startingColors[i]);
+            }
+        }
         if (startingColors.Count == spots.Count) {
             for (int i = 0; i < spots.Count; i++) {
-                int startingIndex = randomizeStartingColors ? Random.Range(0, startingColors.Count) : i;
-                Color col = startingColors[startingIndex];
-                if (randomizeStartingColors) {
-                    startingColors.RemoveAt(startingIndex);
-                }
-                Spot spot = spots[i];
-                if (col.a == 1) {
-                    GameObject newObject = Instantiate(chipPrefab);
-                    newObject.GetComponent<Renderer>().material.color = col;
-                    newObject.transform.position = spot.transform.position;
-                    newObject.transform.rotation = spot.transform.rotation;
-                    spot.currentObject = newObject;
-                    newObject.GetComponent<Pickupable>().spot = spot;
-                    if (startingColorsStuck) {
-                        spot.pickupable = false;
+                if (!randomizeStartingColors || isRandomized[i]) {
+                    int startingIndex = isRandomized[i] ? Random.Range(0, startCols.Count) : 0;
+                    Debug.Log(startingIndex);
+                    Color col = startCols[startingIndex];
+                    startCols.RemoveAt(startingIndex);
+                    Spot spot = spots[i];
+                    if (col.a == 1) {
+                        GameObject newObject = Instantiate(chipPrefab);
+                        newObject.GetComponent<Renderer>().material.color = col;
+                        newObject.transform.position = spot.transform.position;
+                        newObject.transform.rotation = spot.transform.rotation;
+                        spot.currentObject = newObject;
+                        newObject.GetComponent<Pickupable>().spot = spot;
+                        if (startingColorsStuck[i]) {
+                            spot.pickupable = false;
+                        }
+                    }
+                } else {
+                    int startingIndex = i;
+                    Color col = startingColors[startingIndex];
+                    startCols.Remove(col);
+                    Spot spot = spots[i];
+                    Debug.Log(startingIndex);
+                    if (col.a == 1) {
+                        GameObject newObject = Instantiate(chipPrefab);
+                        newObject.GetComponent<Renderer>().material.color = col;
+                        newObject.transform.position = spot.transform.position;
+                        newObject.transform.rotation = spot.transform.rotation;
+                        spot.currentObject = newObject;
+                        newObject.GetComponent<Pickupable>().spot = spot;
+                        if (startingColorsStuck[i]) {
+                            spot.pickupable = false;
+                        }
                     }
                 }
             }
