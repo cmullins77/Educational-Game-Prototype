@@ -21,7 +21,8 @@ public class Grabber : MonoBehaviour
                 if (hit.distance < 2) {
                     GameObject hitObj = hit.transform.gameObject;
                     if (!isHoldingObject) {
-                        if (hitObj.GetComponent<Pickupable>() != null) {
+                        Pickupable pickup = hitObj.GetComponent<Pickupable>();
+                        if (pickup != null && (pickup.spot == null || pickup.spot.pickupable)) {
                             pickupObject(hitObj);
                         } else if (hitObj.GetComponent<Dispenser>() != null) {
                             hitObj.GetComponent<Dispenser>().dispenseItem();

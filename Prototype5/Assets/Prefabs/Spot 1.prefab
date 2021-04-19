@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentObject: {fileID: 0}
   placeable: 1
+  pickupable: 1
 --- !u!1 &8743632996645992551
 GameObject:
   m_ObjectHideFlags: 0

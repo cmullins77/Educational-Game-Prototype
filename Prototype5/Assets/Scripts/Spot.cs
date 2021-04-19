@@ -7,10 +7,10 @@ public class Spot : MonoBehaviour
 
     public GameObject currentObject;
     public bool placeable = true;
+    public bool pickupable = true;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
