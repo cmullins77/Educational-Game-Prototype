@@ -6,12 +6,11 @@ public class ColorAnalyzer : MonoBehaviour
 {
 
     public PaletteType palette;
-    public List<Color> colors;
     public List<ColorType> types;
     // Start is called before the first frame update
     void Start()
     {
-        analyzePalette(colors);
+
     }
 
     // Update is called once per frame
@@ -20,7 +19,7 @@ public class ColorAnalyzer : MonoBehaviour
         
     }
 
-    public void analyzePalette(List<Color> cols) {
+    public PaletteType analyzePalette(List<Color> cols) {
         bool paletteFound = false;
         palette = PaletteType.None;
         types = new List<ColorType>();
@@ -62,6 +61,7 @@ public class ColorAnalyzer : MonoBehaviour
                 palette = PaletteType.Analogous;
             }
         }
+        return palette;
     }
 
     public bool checkAnalagous(List<ColorType> colTypes) {

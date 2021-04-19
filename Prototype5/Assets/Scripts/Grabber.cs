@@ -55,8 +55,8 @@ public class Grabber : MonoBehaviour
 
     void dropObject(Spot newSpot) {
         if (newSpot != null) {
-            currentObject.transform.parent = newSpot.transform;
-            currentObject.transform.localPosition = new Vector3(0, 0, 0);
+            currentObject.transform.parent = null;
+            currentObject.transform.position = newSpot.transform.position;
             currentObject.transform.rotation = newSpot.transform.rotation;
             newSpot.currentObject = currentObject;
             currentObject.GetComponent<Pickupable>().spot = newSpot;
