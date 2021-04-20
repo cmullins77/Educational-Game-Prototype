@@ -183,7 +183,6 @@ public class ColorAnalyzer : MonoBehaviour
         float H, S, V;
         Color.RGBToHSV(col, out H, out S, out V);
         H = H * 360;
-        Debug.Log(H);
         ColorHue type = ColorHue.Red;
         if (H <= 20) {
             type = ColorHue.Red;
@@ -215,7 +214,6 @@ public class ColorAnalyzer : MonoBehaviour
         float H, S, V;
         Color.RGBToHSV(col, out H, out S, out V);
         H = H * 360;
-        Debug.Log(H);
         ColorType type;
 
         float[] tintVals = {70, 70, 65, 60, 60, 50, 60, 70, 50};
