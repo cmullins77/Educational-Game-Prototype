@@ -7,6 +7,7 @@ public class ColorAnalyzer : MonoBehaviour
 
     public PaletteType palette;
     public List<ColorHue> types;
+    public HashSet<ColDetails> details;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +25,13 @@ public class ColorAnalyzer : MonoBehaviour
         bool paletteFound = false;
         palette = PaletteType.None;
         types = new List<ColorHue>();
+        details = new HashSet<ColDetails>();
         foreach (Color col in cols) {
-            ColorHue colorType = getColor(col);
-            if (!types.Contains(colorType)) {
-                types.Add(colorType);
+            ColorHue colorHue = getColor(col);
+            ColorType colorType = getColorType(col);
+            addSpecificType(colorHue, colorType, col);
+            if (!types.Contains(colorHue)) {
+                types.Add(colorHue);
             }
         }
         if (types.Count == 1) {
@@ -232,6 +236,135 @@ public class ColorAnalyzer : MonoBehaviour
         }
         return type;
     }
+
+    public void addSpecificType(ColorHue hue, ColorType type, Color col) {
+        if (type == ColorType.Grayscale) {
+            if (col.r < 0.1) {
+                details.Add(ColDetails.Black);
+            } else if (col.r > 0.95) {
+                details.Add(ColDetails.White);
+            } else {
+                details.Add(ColDetails.Grey);
+                if (col.r < 0.33) {
+                    details.Add(ColDetails.DarkGrey);
+                } else if (col.r < 0.72) {
+                    details.Add(ColDetails.MediumGrey);
+                } else {
+                    details.Add(ColDetails.LightGrey);
+                }
+            }
+        } else if (hue == ColorHue.Red) {
+            details.Add(ColDetails.R);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.RH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.RTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.RTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.RS);
+            }
+        } else if (hue == ColorHue.YellowRed) {
+            details.Add(ColDetails.YR);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.YRH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.YRTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.YRTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.YRS);
+            }
+        } else if (hue == ColorHue.Yellow) {
+            details.Add(ColDetails.Y);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.YH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.YTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.YTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.YS);
+            }
+        } else if (hue == ColorHue.GreenYellow) {
+            details.Add(ColDetails.GY);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.GYH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.GYTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.GYTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.GYS);
+            }
+        } else if (hue == ColorHue.Green) {
+            details.Add(ColDetails.G);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.GH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.GTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.GTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.GS);
+            }
+        } else if (hue == ColorHue.BlueGreen) {
+            details.Add(ColDetails.BG);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.BGH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.BGTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.BGTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.BGS);
+            }
+        } else if (hue == ColorHue.Blue) {
+            details.Add(ColDetails.B);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.BH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.BTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.BTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.BS);
+            }
+        } else if (hue == ColorHue.PurpleBlue) {
+            details.Add(ColDetails.PB);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.PBH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.PBTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.PBTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.PBS);
+            }
+        } else if (hue == ColorHue.Purple) {
+            details.Add(ColDetails.P);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.PBH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.PBTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.PBTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.PBS);
+            }
+        } else if (hue == ColorHue.RedPurple) {
+            details.Add(ColDetails.RP);
+            if (type == ColorType.Hue) {
+                details.Add(ColDetails.RPH);
+            } else if (type == ColorType.Tint) {
+                details.Add(ColDetails.RPTint);
+            } else if (type == ColorType.Tone) {
+                details.Add(ColDetails.RPTone);
+            } else if (type == ColorType.Shade) {
+                details.Add(ColDetails.RPS);
+            }
+        }
+    }
 }
 
 public enum ColorHue
@@ -247,4 +380,14 @@ public enum ColorType
 public enum PaletteType
 {
     None, Monochromatic, Analogous, Complement, NearComplement, SplitComplement, Triadic, Tetradic
+}
+
+public enum ColDetails
+{
+    R, RH, RTint, RTone, RS, YR, YRH, YRTint, YRTone, YRS, 
+    Y, YH, YTint, YTone, YS, GY, GYH, GYTint, GYTone, GYS, 
+    G, GH, GTint, GTone, GS, BG, BGH, BGTint, BGTone, BGS,
+    B, BH, BTint, BTone, BS, PB, PBH, PBTint, PBTone, PBS, 
+    P, PH, PTint, PTone, PS, RP, RPH, RPTint, RPTone, RPS,
+    Black, White, Grey, LightGrey, MediumGrey, DarkGrey
 }

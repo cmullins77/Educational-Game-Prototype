@@ -24,6 +24,7 @@ public class Chart : MonoBehaviour
     public ColorHue goalHue;
     public Text chartText;
     public List<Color> goalColors;
+    public List<ColDetails> requiredPalette;
 
     public List<Spot> spots;
     // Start is called before the first frame update
@@ -51,10 +52,12 @@ public class Chart : MonoBehaviour
             }
         }
         if (startingColors.Count == spots.Count) {
+            Debug.Log("SAME");
             for (int i = 0; i < spots.Count; i++) {
-                if (!randomizeStartingColors || isRandomized[i]) {
+                Debug.Log(i);
+                if (randomizeStartingColors && isRandomized[i]) {
                     int startingIndex = isRandomized[i] ? Random.Range(0, startCols.Count) : 0;
-                    Debug.Log(startingIndex);
+                    Debug.Log("Randomized: " + startingIndex);
                     Color col = startCols[startingIndex];
                     startCols.RemoveAt(startingIndex);
                     Spot spot = spots[i];
@@ -74,17 +77,25 @@ public class Chart : MonoBehaviour
                     Color col = startingColors[startingIndex];
                     startCols.Remove(col);
                     Spot spot = spots[i];
-                    Debug.Log(startingIndex);
+                    Debug.Log("Not Randomized: " + startingIndex);
                     if (col.a == 1) {
+                        Debug.Log("Make new Chip");
                         GameObject newObject = Instantiate(chipPrefab);
                         newObject.GetComponent<Renderer>().material.color = col;
+                        Debug.Log(col);
                         newObject.transform.position = spot.transform.position;
+                        Debug.Log(newObject.transform.position);
                         newObject.transform.rotation = spot.transform.rotation;
+                        Debug.Log(newObject.transform.rotation);
                         spot.currentObject = newObject;
+                        Debug.Log(spot.currentObject);
                         newObject.GetComponent<Pickupable>().spot = spot;
+                        Debug.Log("Pickupable Set");
                         if (startingColorsStuck[i]) {
+                            Debug.Log("Stuck");
                             spot.pickupable = false;
                         }
+                        Debug.Log("All Good");
                     }
                 }
             }
@@ -176,6 +187,28 @@ public class Chart : MonoBehaviour
             chartText.text = "CORRECT!";
             return true;
         }
+        else if (type == ChartType.SpecificColorsAnyOrder) {
+            Debug.Log("Specific Colors");
+            List<Color> colors = new List<Color>();
+            foreach (Spot spot in spots) {
+                if (spot.currentObject != null) {
+                    colors.Add(spot.currentObject.GetComponent<Renderer>().material.color);
+                }
+            }
+            GetComponent<ColorAnalyzer>().analyzePalette(colors);
+            HashSet<ColDetails> details = GetComponent<ColorAnalyzer>().details;
+            for (int i = 0; i < requiredPalette.Count; i++) {
+                Debug.Log(requiredPalette[i]);
+                if (!details.Contains(requiredPalette[i])) {
+                    chartText.text = "INCORRECT!";
+                    return false;
+                }
+                details.Remove(requiredPalette[i]);
+            }
+           
+            chartText.text = "CORRECT!";
+            return true;
+        }
 
         return done;
     }
@@ -187,5 +220,5 @@ public class Chart : MonoBehaviour
 
 public enum ChartType
 {
-    Palette, ColorTypes, Hue, SpecificColors
+    Palette, ColorTypes, Hue, SpecificColors, SpecificColorsAnyOrder
 }

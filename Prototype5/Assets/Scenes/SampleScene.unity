@@ -157,22 +157,16 @@ MonoBehaviour:
   width: 3
   height: 3
   startingColors:
-  - {r: 0.69411767, g: 0.7843138, b: 1, a: 1}
-  - {r: 0.37254903, g: 0.5568628, b: 1, a: 1}
-  - {r: 0, g: 0.29411766, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5686275, b: 0.7176471, a: 1}
-  - {r: 0.2901961, g: 0.427451, b: 0.74509805, a: 1}
-  - {r: 0, g: 0.21568629, b: 0.7372549, a: 1}
-  - {r: 0.27058825, g: 0.29803923, b: 0.36862746, a: 1}
-  - {r: 0.10980393, g: 0.16470589, b: 0.29411766, a: 1}
-  - {r: 0, g: 0.09411766, b: 0.32156864, a: 1}
-  isRandomized: 000100010101010100
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  isRandomized: 000000
   chipPrefab: {fileID: 4217864376830139812, guid: 72c0bf0703675464bb667193d105d8a7, type: 3}
-  startingColorsStuck: 010001000000000001
-  randomizeStartingColors: 1
+  startingColorsStuck: 
+  randomizeStartingColors: 0
   type: 3
   goalPalette: 3
-  goalType: 0
+  goalType: 2
   goalHue: 7
   chartText: {fileID: 393574131}
   goalColors:
@@ -1725,15 +1719,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4002687228192636486, guid: c66d916b6b22f07468357e8e3143da48, type: 3}
       propertyPath: possibleColors.Array.data[1].b
-      value: 0.5613208
+      value: 0.56078434
       objectReference: {fileID: 0}
     - target: {fileID: 4002687228192636486, guid: c66d916b6b22f07468357e8e3143da48, type: 3}
       propertyPath: possibleColors.Array.data[1].g
-      value: 1
+      value: 0.91977143
       objectReference: {fileID: 0}
     - target: {fileID: 4002687228192636486, guid: c66d916b6b22f07468357e8e3143da48, type: 3}
       propertyPath: possibleColors.Array.data[1].r
-      value: 0.9975629
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4002687228192636486, guid: c66d916b6b22f07468357e8e3143da48, type: 3}
       propertyPath: possibleColors.Array.data[2].b
