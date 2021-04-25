@@ -8,12 +8,13 @@ public class Grabber : MonoBehaviour
     GameObject currentObject;
     public Camera cam;
     public Transform holdingPosition;
+    public bool canGrab;
 
     private void Start() {
     }
     void Update() {
 
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(1) && canGrab) {
             RaycastHit hit;
             // Does the ray intersect any objects
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);

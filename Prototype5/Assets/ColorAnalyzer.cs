@@ -220,8 +220,8 @@ public class ColorAnalyzer : MonoBehaviour
         H = H * 360;
         ColorType type;
 
-        float[] tintVals = {70, 70, 65, 60, 60, 50, 60, 70, 50};
-        float[] shadeVals = {85, 85, 90, 90, 80, 80, 75, 80, 85};
+        float[] tintVals = {70, 70, 65, 60, 60, 50, 60, 70, 50, 70};
+        float[] shadeVals = {85, 85, 90, 90, 80, 80, 75, 80, 85, 85};
         int hueVal = (int)getColor(col);
         if (S < 0.05f || V < 0.15f) {
             type = ColorType.Grayscale;

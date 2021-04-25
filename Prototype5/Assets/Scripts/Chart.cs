@@ -209,6 +209,9 @@ public class Chart : MonoBehaviour
             chartText.text = "CORRECT!";
             return true;
         }
+        else if (type == ChartType.Empty) {
+            return true;
+        }
 
         return done;
     }
@@ -220,5 +223,5 @@ public class Chart : MonoBehaviour
 
 public enum ChartType
 {
-    Palette, ColorTypes, Hue, SpecificColors, SpecificColorsAnyOrder
+    Palette, ColorTypes, Hue, SpecificColors, SpecificColorsAnyOrder, Empty
 }

@@ -4,5 +4,35 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/1-Sort.unity
+    guid: 8a4a2817be7744643b8d4b028fb7ef9f
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/2 - Palettes.unity
+    guid: fe5613f83e9304c429588c39e8c046b9
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/3-TintsTonesetc.unity
+    guid: 606d3ed3bdd1ea746a3636eb7c228157
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/4 - Colors.unity
+    guid: f5caf61b6631d824c965aceb62e3ab82
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/5 - Color Mixing.unity
+    guid: 2f6fd8585bc001a4097f55f90504d796
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/6 - Paintings.unity
+    guid: 7d9b8489c12aa0b46a04f96b555b5415
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/7 - Value Sort.unity
+    guid: 5c834952db8bd994eb65da8c2b406166
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/8 - Color Temps.unity
+    guid: d352e5c87ad7e684db9ba331bad73cfd
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/9 - Color Blindness.unity
+    guid: 21993cac5af16684e980266886bd5dd6
+  - enabled: 1
+    path: Assets/Scenes/FinalScenes/10 - Doors.unity
+    guid: 7ba8e0b8b0003a042a58a892a927ed52
   m_configObjects: {}

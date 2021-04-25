@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameController : MonoBehaviour
     public GameObject play2Cam;
     public GameObject playerBody1;
     public GameObject playerBody2;
+
+    public bool canGrab;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,28 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightControl)) {
             swapPlayers();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+            int next = currentScene - 1;
+            if (next < 0) {
+                next = 9;
+            }
+            SceneManager.LoadScene(next);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+            int next = currentScene + 1;
+            if (next > 9) {
+                next = 0;
+            }
+            SceneManager.LoadScene(next);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
         }
     }
 
@@ -82,6 +107,12 @@ public class GameController : MonoBehaviour
         }
         if (done) {
             Debug.Log("LEVEL DONE!");
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+            int next = currentScene + 1;
+            if (next > 9) {
+                next = 0;
+            }
+            SceneManager.LoadScene(next);
         }
     }
 }
